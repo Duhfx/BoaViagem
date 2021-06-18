@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Boa Viagem</string>
+
+    <!-- LOGIN   -->
+    <string name="login_usuario">Usuário</string>
+    <string name="login_senha">Senha</string>
+    <string name="login_entrar">Entrar</string>
+    <string name="login_registrar">Registrar</string>
+
+    <!-- REGISTRAR   -->
+    <string name="registrar_nome">Nome</string>
+    <string name="registrar_email">Email</string>
+    <string name="registrar_senha">Senha</string>
+    <string name="registrar_concluir">Concluir</string>
+
+    <!-- MENU   -->
+    <string name="menu_home">Home</string>
+    <string name="menu_nova_viagem">Nova Viagem</string>
+    <string name="menu_ajuda">Ajuda</string>
+
+</resources>
