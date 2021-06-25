@@ -16,23 +16,44 @@
         tools:layout_editor_absoluteX="25dp" />
 
     <EditText
-        android:id="@+id/ed_data_chegada_viagem"
+        android:id="@+id/ed_data_partida_viagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Data Chegada"
+        android:layout_marginTop="25dp"
         android:clickable="false"
         android:focusable="false"
+        android:hint="Data Partida"
         app:layout_constraintTop_toBottomOf="@+id/ed_destino_viagem"
         tools:layout_editor_absoluteX="25dp" />
 
     <EditText
-        android:id="@+id/ed_data_partida_viagem"
+        android:id="@+id/ed_data_chegada_viagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Data Partida"
+        android:layout_marginTop="25dp"
         android:clickable="false"
         android:focusable="false"
-        app:layout_constraintTop_toBottomOf="@+id/ed_data_chegada_viagem"
+        android:hint="Data Chegada"
+        app:layout_constraintTop_toBottomOf="@+id/ed_data_partida_viagem"
         tools:layout_editor_absoluteX="25dp" />
+
+    <Spinner
+        android:id="@+id/select_tipo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_data_chegada_viagem" />
+
+    <Button
+        android:id="@+id/btn_nova_viagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="25dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

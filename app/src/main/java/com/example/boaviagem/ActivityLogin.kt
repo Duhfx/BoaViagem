@@ -33,8 +33,12 @@ class ActivityLogin : AppCompatActivity() {
 
         if (dadosUsuario == null || dadosUsuario.id == 0)
             Toast.makeText(this, "Errou", Toast.LENGTH_LONG).show()
-        else
-            startActivity(Intent(this, ActivityHome::class.java))
+        else {
+            val intent = Intent(this, ActivityHome::class.java)
+            intent.putExtra(EXTRA_ID_USUARIO, dadosUsuario.id)
+
+            startActivity(intent)
+        }
     }
 
     private fun ValidaUsuario(): Usuario {

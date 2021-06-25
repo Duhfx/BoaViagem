@@ -4,12 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.boaviagem.dao.UsuarioDao
+import com.example.boaviagem.dao.ViagemDao
 import com.example.boaviagem.model.Usuario
+import com.example.boaviagem.model.Viagem
 
-@Database(entities = arrayOf(Usuario::class), version = 1)
+@Database(entities = arrayOf(Usuario::class, Viagem::class), version = 2)
+@TypeConverters(Converters::class)
 abstract class BoaViagemDatabase : RoomDatabase() {
     abstract  fun UsuarioDao() : UsuarioDao
+    abstract  fun ViagemDao() : ViagemDao
 
     companion object {
         @Volatile
@@ -26,7 +31,7 @@ abstract class BoaViagemDatabase : RoomDatabase() {
                     context.applicationContext,
                     BoaViagemDatabase::class.java,
                     "boaviagem_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
 
                 INSTANCE = instance
 

@@ -39,6 +39,8 @@ class ActivityRegistrar : AppCompatActivity() {
             val id = repository.adicionaUsuario(dadosUsuario)
             if (id != 0L)
               LimpaCampos()
+
+            //Toast.makeText(applicationContext, "Usuário cadastrado", Toast.LENGTH_LONG).show()
       }
     }
 

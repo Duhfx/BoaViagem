@@ -18,4 +18,10 @@
     <string name="menu_nova_viagem">Nova Viagem</string>
     <string name="menu_ajuda">Ajuda</string>
 
+    <string-array name="TiposViagem">
+        <item>Selecione um tipo de viagem...</item>
+        <item>Lazer</item>
+        <item>Negócio</item>
+    </string-array>
+
 </resources>

@@ -2,8 +2,11 @@ package com.example.boaviagem
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
+const val EXTRA_ID_USUARIO = "ID_USUARIO"
 
 class ActivityHome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,4 +36,17 @@ class ActivityHome : AppCompatActivity() {
 
         return true
     }
+
+    fun selecionaFragmentNovaViagem() {
+        createFragment(FragmentoNovaViagem());
+
+        val bottomNav = findViewById<BottomNavigationView>(R.id.navigationBar)
+
+        bottomNav.selectedItemId = R.id.fragmento_nova_viagem
+    }
+
+    fun getIDUsuarioLogado(): Int? {
+        return intent.extras?.getInt(EXTRA_ID_USUARIO)
+    }
+
 }
