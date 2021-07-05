@@ -29,9 +29,9 @@ class ActivityLogin : AppCompatActivity() {
     }
 
     fun onEntrar(view: View) {
-        val dadosUsuario = ValidaUsuario();
+        val dadosUsuario = validaUsuario();
 
-        if (dadosUsuario == null || dadosUsuario.id == 0)
+        if (dadosUsuario.id == 0)
             Toast.makeText(this, "Errou", Toast.LENGTH_LONG).show()
         else {
             val intent = Intent(this, ActivityHome::class.java)
@@ -41,7 +41,7 @@ class ActivityLogin : AppCompatActivity() {
         }
     }
 
-    private fun ValidaUsuario(): Usuario {
+    private fun validaUsuario(): Usuario {
         val editEmail = findViewById<EditText>(R.id.ed_usuario_login).text;
         val editSenha = findViewById<EditText>(R.id.ed_senha_login).text;
 

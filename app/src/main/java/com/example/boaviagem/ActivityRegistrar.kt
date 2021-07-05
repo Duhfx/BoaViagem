@@ -14,7 +14,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 
 class ActivityRegistrar : AppCompatActivity() {
-
     private lateinit var repository: UsuarioRepository
     private lateinit var editNome: Editable
     private lateinit var editEmail: Editable
@@ -39,8 +38,6 @@ class ActivityRegistrar : AppCompatActivity() {
             val id = repository.adicionaUsuario(dadosUsuario)
             if (id != 0L)
               LimpaCampos()
-
-            //Toast.makeText(applicationContext, "Usuário cadastrado", Toast.LENGTH_LONG).show()
       }
     }
 

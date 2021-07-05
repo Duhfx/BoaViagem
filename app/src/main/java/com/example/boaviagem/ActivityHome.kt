@@ -4,14 +4,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
+import com.example.boaviagem.database.BoaViagemDatabase
+import com.example.boaviagem.database.ViagemRepository
+import com.example.boaviagem.model.Viagem
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 const val EXTRA_ID_USUARIO = "ID_USUARIO"
 
 class ActivityHome : AppCompatActivity() {
+
+    private lateinit var repository: ViagemRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        repository = ViagemRepository(BoaViagemDatabase.getDatabase(this).ViagemDao())
 
         createFragment(FragmentoHome())
 
@@ -45,8 +56,23 @@ class ActivityHome : AppCompatActivity() {
         bottomNav.selectedItemId = R.id.fragmento_nova_viagem
     }
 
-    fun getIDUsuarioLogado(): Int? {
+    fun getViagensItemUsuario(): List<Viagem> {
+        val idUsuario = getIDUsuarioLogado()
+        var listaViagem: List<Viagem> = ArrayList()
+
+        runBlocking {
+            listaViagem = idUsuario?.let { repository.buscaViagemUsuario(it) }!!
+        }
+
+        return listaViagem;
+    }
+
+    private fun getIDUsuarioLogado(): Int? {
         return intent.extras?.getInt(EXTRA_ID_USUARIO)
+    }
+
+    fun getViagemRepository(): ViagemRepository {
+        return repository
     }
 
 }

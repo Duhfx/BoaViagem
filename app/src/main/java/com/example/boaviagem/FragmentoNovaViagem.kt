@@ -12,25 +12,26 @@ import android.widget.EditText
 import android.widget.Spinner
 import com.example.boaviagem.database.BoaViagemDatabase
 import com.example.boaviagem.database.ViagemRepository
+import com.example.boaviagem.model.TipoViagem
 import com.example.boaviagem.model.Viagem
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FragmentoNovaViagem : Fragment() {
-
-    private lateinit var repository: ViagemRepository
+    lateinit var activityHome: ActivityHome
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater.inflate(R.layout.fragment_nova_viagem, container, false)
         val editDataChegada = view?.findViewById<EditText>(R.id.ed_data_chegada_viagem)
         val editDataPartida = view?.findViewById<EditText>(R.id.ed_data_partida_viagem)
 
-        val viagemDao = context?.let { BoaViagemDatabase.getDatabase(it).ViagemDao() }
-
-        repository =
-            viagemDao?.let { ViagemRepository(it) }!!
+        activityHome = activity as ActivityHome
 
         populaSpinner(view)
 
-        //view?.findViewById<Button>(R.id.btn_nova_viagem)?.setOnClickListener { onNovaViagem(view) }
+        view?.findViewById<Button>(R.id.btn_nova_viagem)?.setOnClickListener { onNovaViagem(view) }
 
         editDataChegada?.setOnClickListener {
             val datePickerDialog = activity?.let { itActivity -> DatePickerDialog(itActivity) }
@@ -78,8 +79,19 @@ class FragmentoNovaViagem : Fragment() {
         }
     }
 
-    fun onNovaViagem(view: View) {
+    private fun onNovaViagem(view: View) {
+        val destino = view.findViewById<EditText>(R.id.ed_destino_viagem).text;
+        val dataPartidaTxt = view.findViewById<EditText>(R.id.ed_data_partida_viagem).text;
+        val dataChegadaTxt = view.findViewById<EditText>(R.id.ed_data_chegada_viagem).text;
 
+        val dataPartida = SimpleDateFormat("dd/MM/yyyy").parse(dataPartidaTxt.toString())
+        val dataChegada = SimpleDateFormat("dd/MM/yyyy").parse(dataChegadaTxt.toString())
+
+        val dadosViagem = Viagem(destino.toString(), dataChegada, dataPartida, 0.0,  TipoViagem.LAZER, 1);
+
+        GlobalScope.launch {
+            val id = activityHome.getViagemRepository().adicionarNovaViagem(dadosViagem)
+        }
     }
 
     fun inicializaEditData(editData: EditText) {

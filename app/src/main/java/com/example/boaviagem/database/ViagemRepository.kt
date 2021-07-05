@@ -12,4 +12,10 @@ class ViagemRepository(private val viagemDao: ViagemDao) {
             viagemDao.Insert(viagem)
         }
     }
+
+    suspend fun buscaViagemUsuario(id: Int): List<Viagem> {
+        return withContext(Dispatchers.IO) {
+            viagemDao.BuscaViagens();
+        }
+    }
 }

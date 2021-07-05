@@ -12,7 +12,7 @@ interface ViagemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun Insert(user: Viagem): Long
 
-    @Query("SELECT * FROM Viagem WHERE ID = :idUsuario")
-    fun BuscaViagens(idUsuario: Int) : List<Viagem>
+    @Query("SELECT * FROM Viagem")
+    fun BuscaViagens() : List<Viagem>
 
 }
