@@ -10,9 +10,9 @@ import com.example.boaviagem.model.Viagem
 interface ViagemDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun Insert(user: Viagem): Long
+    fun insert(user: Viagem): Long
 
-    @Query("SELECT * FROM Viagem")
-    fun BuscaViagens() : List<Viagem>
+    @Query("SELECT * FROM Viagem WHERE idUsuario = :idUsuario")
+    fun buscaViagens(idUsuario: Int) : List<Viagem>
 
 }

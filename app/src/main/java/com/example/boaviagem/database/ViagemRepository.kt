@@ -9,13 +9,13 @@ class ViagemRepository(private val viagemDao: ViagemDao) {
 
     suspend fun adicionarNovaViagem(viagem: Viagem): Long {
         return withContext(Dispatchers.IO) {
-            viagemDao.Insert(viagem)
+            viagemDao.insert(viagem)
         }
     }
 
-    suspend fun buscaViagemUsuario(id: Int): List<Viagem> {
+    suspend fun buscaViagemUsuario(idUsuario: Int): List<Viagem> {
         return withContext(Dispatchers.IO) {
-            viagemDao.BuscaViagens();
+            viagemDao.buscaViagens(idUsuario);
         }
     }
 }

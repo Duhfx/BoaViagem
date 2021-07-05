@@ -58,17 +58,17 @@ class ActivityHome : AppCompatActivity() {
 
     fun getViagensItemUsuario(): List<Viagem> {
         val idUsuario = getIDUsuarioLogado()
-        var listaViagem: List<Viagem> = ArrayList()
+        var listaViagem: List<Viagem>
 
         runBlocking {
-            listaViagem = idUsuario?.let { repository.buscaViagemUsuario(it) }!!
+            listaViagem = repository.buscaViagemUsuario(idUsuario)
         }
 
         return listaViagem;
     }
 
-    private fun getIDUsuarioLogado(): Int? {
-        return intent.extras?.getInt(EXTRA_ID_USUARIO)
+    fun getIDUsuarioLogado(): Int {
+        return intent.extras?.getInt(EXTRA_ID_USUARIO)!!
     }
 
     fun getViagemRepository(): ViagemRepository {

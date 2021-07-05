@@ -79,15 +79,28 @@ class FragmentoNovaViagem : Fragment() {
         }
     }
 
+    private fun getTipoSelecionado(): TipoViagem {
+        val spinner = view?.findViewById<Spinner>(R.id.select_tipo)
+        val itemSelecionado = spinner?.selectedItem as String
+
+        if (itemSelecionado == "Lazer")
+            return TipoViagem.LAZER
+        else if (itemSelecionado == "Negócio")
+            return TipoViagem.NEGOCIO;
+
+        return TipoViagem.LAZER;
+    }
+
     private fun onNovaViagem(view: View) {
+        val idUsuario = activityHome.getIDUsuarioLogado()
         val destino = view.findViewById<EditText>(R.id.ed_destino_viagem).text;
         val dataPartidaTxt = view.findViewById<EditText>(R.id.ed_data_partida_viagem).text;
         val dataChegadaTxt = view.findViewById<EditText>(R.id.ed_data_chegada_viagem).text;
 
-        val dataPartida = SimpleDateFormat("dd/MM/yyyy").parse(dataPartidaTxt.toString())
-        val dataChegada = SimpleDateFormat("dd/MM/yyyy").parse(dataChegadaTxt.toString())
+        val dataPartida = SimpleDateFormat("dd/MM/yyyy").parse(dataPartidaTxt.toString())!!
+        val dataChegada = SimpleDateFormat("dd/MM/yyyy").parse(dataChegadaTxt.toString())!!
 
-        val dadosViagem = Viagem(destino.toString(), dataChegada, dataPartida, 0.0,  TipoViagem.LAZER, 1);
+        val dadosViagem = Viagem(destino.toString(), dataChegada, dataPartida, 0.0,  getTipoSelecionado(), idUsuario);
 
         GlobalScope.launch {
             val id = activityHome.getViagemRepository().adicionarNovaViagem(dadosViagem)
