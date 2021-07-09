@@ -19,7 +19,6 @@
         <TextView
             android:id="@+id/viagem_destino_list"
             android:layout_width="wrap_content"
-            android:text="Destino"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_toEndOf="@id/viagem_imagem_list"
@@ -30,8 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/viagem_imagem_list"
-            android:layout_below="@id/viagem_destino_list"
-            android:text="Motivo viagem" />
+            android:layout_below="@id/viagem_destino_list" />
+
+        <ImageView
+            android:id="@+id/viagem_deletarViagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_delete" />
 
     </RelativeLayout>
 

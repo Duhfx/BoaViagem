@@ -1,9 +1,6 @@
 package com.example.boaviagem.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.boaviagem.model.Viagem
 
 @Dao
@@ -15,4 +12,6 @@ interface ViagemDao {
     @Query("SELECT * FROM Viagem WHERE idUsuario = :idUsuario")
     fun buscaViagens(idUsuario: Int) : List<Viagem>
 
+    @Delete
+    fun delete(viagem: Viagem)
 }

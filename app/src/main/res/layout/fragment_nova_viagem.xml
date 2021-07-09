@@ -11,7 +11,7 @@
         android:id="@+id/ed_destino_viagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Destino da viagem"
+        android:hint="@string/destino_da_viagem"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="25dp" />
 
@@ -22,7 +22,7 @@
         android:layout_marginTop="25dp"
         android:clickable="false"
         android:focusable="false"
-        android:hint="Data Partida"
+        android:hint="@string/data_partida"
         app:layout_constraintTop_toBottomOf="@+id/ed_destino_viagem"
         tools:layout_editor_absoluteX="25dp" />
 
@@ -33,27 +33,52 @@
         android:layout_marginTop="25dp"
         android:clickable="false"
         android:focusable="false"
-        android:hint="Data Chegada"
+        android:hint="@string/data_chegada"
         app:layout_constraintTop_toBottomOf="@+id/ed_data_partida_viagem"
         tools:layout_editor_absoluteX="25dp" />
 
-    <Spinner
-        android:id="@+id/select_tipo"
-        android:layout_width="0dp"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="TipoViagem"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/ed_data_chegada_viagem"
+        tools:layout_editor_absoluteX="25dp">
+
+        <RadioButton
+            android:id="@+id/radio_lazer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/tipo_lazer"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/radio_negocio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="@string/tipo_negocio"
+            android:textSize="18sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_adicionarGasto"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/adicionar_gasto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_data_chegada_viagem" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <Button
         android:id="@+id/btn_nova_viagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cadastrar"
+        android:text="@string/cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="25dp" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

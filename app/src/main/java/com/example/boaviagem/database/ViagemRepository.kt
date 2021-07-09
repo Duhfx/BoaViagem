@@ -18,4 +18,10 @@ class ViagemRepository(private val viagemDao: ViagemDao) {
             viagemDao.buscaViagens(idUsuario);
         }
     }
+
+    suspend fun deletaViagem(viagem: Viagem){
+        return withContext(Dispatchers.IO) {
+            viagemDao.delete(viagem);
+        }
+    }
 }

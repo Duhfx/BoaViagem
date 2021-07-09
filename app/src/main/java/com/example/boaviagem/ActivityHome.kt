@@ -2,6 +2,7 @@ package com.example.boaviagem
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import com.example.boaviagem.database.BoaViagemDatabase
@@ -65,6 +66,12 @@ class ActivityHome : AppCompatActivity() {
         }
 
         return listaViagem;
+    }
+
+    fun atualizaRecycler() {
+        val fragHome = supportFragmentManager.findFragmentById(R.id.fragmento_home)
+
+        (fragHome as FragmentoHome).atualizaAdapter(getViagensItemUsuario())
     }
 
     fun getIDUsuarioLogado(): Int {

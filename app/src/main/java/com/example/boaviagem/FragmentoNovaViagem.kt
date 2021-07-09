@@ -1,15 +1,14 @@
 package com.example.boaviagem
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import com.example.boaviagem.database.BoaViagemDatabase
 import com.example.boaviagem.database.ViagemRepository
 import com.example.boaviagem.model.TipoViagem
@@ -29,9 +28,8 @@ class FragmentoNovaViagem : Fragment() {
 
         activityHome = activity as ActivityHome
 
-        populaSpinner(view)
-
         view?.findViewById<Button>(R.id.btn_nova_viagem)?.setOnClickListener { onNovaViagem(view) }
+        view?.findViewById<Button>(R.id.btn_adicionarGasto)?.setOnClickListener { onAdicionarGasto(view) }
 
         editDataChegada?.setOnClickListener {
             val datePickerDialog = activity?.let { itActivity -> DatePickerDialog(itActivity) }
@@ -60,35 +58,13 @@ class FragmentoNovaViagem : Fragment() {
         return view
     }
 
-    private fun populaSpinner(view: View) {
-        val spinner = view?.findViewById<Spinner>(R.id.select_tipo)
-
-        if (context != null) {
-            ArrayAdapter.createFromResource(
-                context!!,
-                R.array.TiposViagem,
-                android.R.layout.simple_spinner_dropdown_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-                if (spinner != null) {
-                    spinner.adapter = adapter
-                    spinner.setSelection(0)
-                }
-            }
-        }
-    }
-
     private fun getTipoSelecionado(): TipoViagem {
-        val spinner = view?.findViewById<Spinner>(R.id.select_tipo)
-        val itemSelecionado = spinner?.selectedItem as String
+        val btnLazer = view?.findViewById<RadioButton>(R.id.radio_lazer)
 
-        if (itemSelecionado == "Lazer")
-            return TipoViagem.LAZER
-        else if (itemSelecionado == "Negócio")
+       if (btnLazer != null && btnLazer.isChecked)
+           return TipoViagem.LAZER;
+        else
             return TipoViagem.NEGOCIO;
-
-        return TipoViagem.LAZER;
     }
 
     private fun onNovaViagem(view: View) {
@@ -118,6 +94,18 @@ class FragmentoNovaViagem : Fragment() {
 
                 datePickerDialog.show()
             }
+        }
+    }
+
+    fun onAdicionarGasto(view: View) {
+        val intent = Intent(activityHome, ActivityCustos::class.java)
+        startActivityForResult(intent, 5)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK && data != null) {
         }
     }
 }

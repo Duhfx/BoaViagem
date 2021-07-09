@@ -31,7 +31,7 @@ class ActivityLogin : AppCompatActivity() {
     fun onEntrar(view: View) {
         val dadosUsuario = validaUsuario();
 
-        if (dadosUsuario.id == 0)
+        if (dadosUsuario == null || dadosUsuario.id == 0)
             Toast.makeText(this, "Errou", Toast.LENGTH_LONG).show()
         else {
             val intent = Intent(this, ActivityHome::class.java)

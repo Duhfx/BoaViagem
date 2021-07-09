@@ -17,6 +17,14 @@
     <string name="menu_home">Home</string>
     <string name="menu_nova_viagem">Nova Viagem</string>
     <string name="menu_ajuda">Ajuda</string>
+    <string name="adicionar_viagem">Adicionar Viagem</string>
+    <string name="destino_da_viagem">Destino da viagem</string>
+    <string name="data_partida">Data Partida</string>
+    <string name="data_chegada">Data Chegada</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="tipo_lazer">Lazer</string>
+    <string name="tipo_negocio">Negócio</string>
+    <string name="adicionar_gasto">Adicionar Gasto</string>
 
     <string-array name="TiposViagem">
         <item>Selecione um tipo de viagem...</item>
