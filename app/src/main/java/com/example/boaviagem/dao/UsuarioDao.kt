@@ -13,5 +13,5 @@ interface UsuarioDao {
     fun Insert(user: Usuario): Long
 
     @Query("SELECT * FROM Usuario WHERE EMAIL = :emailUsuario AND SENHA = :senhaUsuario")
-    fun FindByEmailPassword(emailUsuario: String, senhaUsuario: String): Usuario
+    fun FindByEmailPassword(emailUsuario: String, senhaUsuario: String): Usuario?
 }

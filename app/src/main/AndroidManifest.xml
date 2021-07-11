@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BoaViagem">
-        <activity android:name=".ActivityCustos"></activity>
+        <activity android:name=".ActivityGastos"></activity>
         <activity android:name=".ActivityHome" />
         <activity android:name=".ActivityRegistrar" />
         <activity android:name=".ActivityLogin">

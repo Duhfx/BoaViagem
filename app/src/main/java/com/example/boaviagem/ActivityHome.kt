@@ -6,7 +6,9 @@ import android.view.View
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import com.example.boaviagem.database.BoaViagemDatabase
+import com.example.boaviagem.database.GastoRepository
 import com.example.boaviagem.database.ViagemRepository
+import com.example.boaviagem.model.Gasto
 import com.example.boaviagem.model.Viagem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.GlobalScope
@@ -18,12 +20,15 @@ const val EXTRA_ID_USUARIO = "ID_USUARIO"
 class ActivityHome : AppCompatActivity() {
 
     private lateinit var repository: ViagemRepository
+    private lateinit var repositoryGasto: GastoRepository
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         repository = ViagemRepository(BoaViagemDatabase.getDatabase(this).ViagemDao())
+        repositoryGasto = GastoRepository(BoaViagemDatabase.getDatabase(this).GastoDao())
 
         createFragment(FragmentoHome())
 
@@ -52,9 +57,13 @@ class ActivityHome : AppCompatActivity() {
     fun selecionaFragmentNovaViagem() {
         createFragment(FragmentoNovaViagem());
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.navigationBar)
+        findViewById<BottomNavigationView>(R.id.navigationBar).selectedItemId = R.id.fragmento_nova_viagem
+    }
 
-        bottomNav.selectedItemId = R.id.fragmento_nova_viagem
+    fun selecionaFragmentoHome() {
+        createFragment(FragmentoHome());
+
+        findViewById<BottomNavigationView>(R.id.navigationBar).selectedItemId = R.id.fragmento_home
     }
 
     fun getViagensItemUsuario(): List<Viagem> {
@@ -68,10 +77,26 @@ class ActivityHome : AppCompatActivity() {
         return listaViagem;
     }
 
-    fun atualizaRecycler() {
-        val fragHome = supportFragmentManager.findFragmentById(R.id.fragmento_home)
+    fun getGastosViagem(idViagem: Int): List<Gasto> {
+        var  listaGastos: List<Gasto>
 
-        (fragHome as FragmentoHome).atualizaAdapter(getViagensItemUsuario())
+        runBlocking {
+            listaGastos = repositoryGasto.buscaGastoPorViagem(idViagem)
+        }
+
+        return listaGastos;
+    }
+
+    fun atualizaRecyclerViagem() {
+        val fragHome = supportFragmentManager.fragments.last() as FragmentoHome
+
+        fragHome.atualizaAdapter(getViagensItemUsuario())
+    }
+
+    fun atualizaRecyclerGasto() {
+        val fragViagem = supportFragmentManager.fragments.last() as FragmentoNovaViagem
+
+        fragViagem.atualizaRecyclerGasto()
     }
 
     fun getIDUsuarioLogado(): Int {
@@ -80,6 +105,22 @@ class ActivityHome : AppCompatActivity() {
 
     fun getViagemRepository(): ViagemRepository {
         return repository
+    }
+
+    fun getGastoRepository(): GastoRepository {
+        return repositoryGasto
+    }
+
+    fun onViagemSelecionada(idViagem: Int) {
+        selecionaFragmentNovaViagem()
+
+        supportFragmentManager.executePendingTransactions()
+
+        val dadosViagem = runBlocking {
+            repository.buscaViagem(idViagem)
+        }
+
+        (supportFragmentManager.fragments.last() as FragmentoNovaViagem).setDadosViagem(dadosViagem)
     }
 
 }

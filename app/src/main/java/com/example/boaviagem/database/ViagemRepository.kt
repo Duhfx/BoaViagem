@@ -19,6 +19,12 @@ class ViagemRepository(private val viagemDao: ViagemDao) {
         }
     }
 
+    suspend fun buscaViagem(id: Int): Viagem {
+        return withContext(Dispatchers.IO) {
+            viagemDao.buscaViagem(id);
+        }
+    }
+
     suspend fun deletaViagem(viagem: Viagem){
         return withContext(Dispatchers.IO) {
             viagemDao.delete(viagem);

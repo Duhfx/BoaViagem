@@ -29,24 +29,35 @@ class ActivityLogin : AppCompatActivity() {
     }
 
     fun onEntrar(view: View) {
-        val dadosUsuario = validaUsuario();
+        val idUsuario = validaUsuario();
 
-        if (dadosUsuario == null || dadosUsuario.id == 0)
-            Toast.makeText(this, "Errou", Toast.LENGTH_LONG).show()
-        else {
+        if(idUsuario != 0) {
             val intent = Intent(this, ActivityHome::class.java)
-            intent.putExtra(EXTRA_ID_USUARIO, dadosUsuario.id)
+            intent.putExtra(EXTRA_ID_USUARIO, idUsuario)
 
             startActivity(intent)
         }
     }
 
-    private fun validaUsuario(): Usuario {
+    private fun validaUsuario(): Int {
         val editEmail = findViewById<EditText>(R.id.ed_usuario_login).text;
         val editSenha = findViewById<EditText>(R.id.ed_senha_login).text;
 
-        return runBlocking {
+        if (editEmail.toString().isEmpty() || editSenha.toString().isEmpty()) {
+            Toast.makeText(this, "Insira seu usuário e senha", Toast.LENGTH_SHORT).show()
+            return 0;
+        }
+
+        val dadosUsuario = runBlocking {
             repository.usuarioExiste(editEmail.toString(), editSenha.toString())
         }
+
+        if (dadosUsuario == null || dadosUsuario.id == 0) {
+            Toast.makeText(this, "Usuário ou senha inválidos", Toast.LENGTH_SHORT).show()
+            return 0;
+            return 0;
+        }
+
+        return dadosUsuario.id;
     }
 }

@@ -1,84 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+
+<ScrollView
     android:layout_height="match_parent"
-    android:padding="25dp"
-    tools:context=".FragmentoNovaViagem" >
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+    android:fillViewport="true"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <EditText
-        android:id="@+id/ed_destino_viagem"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/destino_da_viagem"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="25dp" />
+        android:layout_height="0dp" >
 
-    <EditText
-        android:id="@+id/ed_data_partida_viagem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:clickable="false"
-        android:focusable="false"
-        android:hint="@string/data_partida"
-        app:layout_constraintTop_toBottomOf="@+id/ed_destino_viagem"
-        tools:layout_editor_absoluteX="25dp" />
-
-    <EditText
-        android:id="@+id/ed_data_chegada_viagem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:clickable="false"
-        android:focusable="false"
-        android:hint="@string/data_chegada"
-        app:layout_constraintTop_toBottomOf="@+id/ed_data_partida_viagem"
-        tools:layout_editor_absoluteX="25dp" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:contentDescription="TipoViagem"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/ed_data_chegada_viagem"
-        tools:layout_editor_absoluteX="25dp">
-
-        <RadioButton
-            android:id="@+id/radio_lazer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/tipo_lazer"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/radio_negocio"
+        <EditText
+            android:id="@+id/ed_destino_viagem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:text="@string/tipo_negocio"
-            android:textSize="18sp" />
-    </RadioGroup>
+            android:hint="@string/destino_da_viagem"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_adicionarGasto"
-        android:layout_marginTop="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/adicionar_gasto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        <EditText
+            android:id="@+id/ed_data_partida_viagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:hint="@string/data_partida"
+            app:layout_constraintTop_toBottomOf="@+id/ed_destino_viagem" />
 
-    <Button
-        android:id="@+id/btn_nova_viagem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cadastrar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="25dp" />
+        <EditText
+            android:id="@+id/ed_data_chegada_viagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:hint="@string/data_chegada"
+            app:layout_constraintTop_toBottomOf="@+id/ed_data_partida_viagem" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/ed_orcamento_viagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/orcamento"
+            android:inputType="numberDecimal"
+            app:layout_constraintTop_toBottomOf="@+id/ed_data_chegada_viagem"
+            android:layout_marginTop="10dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/tipoviagem"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/ed_orcamento_viagem">
+
+            <RadioButton
+                android:id="@+id/radio_lazer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/tipo_lazer"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radio_negocio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:text="@string/tipo_negocio"
+                android:textSize="18sp" />
+        </RadioGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_gasto"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_adicionarGasto"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+            tools:listitem="@layout/gasto_list" />
+
+        <Button
+            android:id="@+id/btn_adicionarGasto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adicionar_gasto"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/btn_nova_viagem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_nova_viagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="25dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

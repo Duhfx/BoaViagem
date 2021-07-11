@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="25dp"
+    tools:context=".ActivityGastos">
+
+    <EditText
+        android:id="@+id/ed_descricao_gasto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="25dp" />
+
+
+    <EditText
+        android:id="@+id/ed_local_gasto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Local"
+        app:layout_constraintTop_toBottomOf="@id/ed_descricao_gasto"
+        tools:layout_editor_absoluteX="25dp" />
+
+    <EditText
+        android:id="@+id/ed_valor_gasto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Valor"
+        app:layout_constraintTop_toBottomOf="@id/ed_local_gasto"
+        tools:layout_editor_absoluteX="25dp" />
+
+    <EditText
+        android:id="@+id/ed_data_gasto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        android:hint="@string/data_gasto"
+        app:layout_constraintTop_toBottomOf="@+id/ed_valor_gasto"
+        tools:layout_editor_absoluteX="25dp" />
+
+    <RadioGroup
+        android:id="@+id/rd_group_gasto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/ed_data_gasto"
+        tools:layout_editor_absoluteX="25dp">
+
+        <RadioButton
+            android:id="@+id/rd_gasto_combustivel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Combustivel"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/rd_gasto_alimentacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alimentação"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/rd_gasto_hospedagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hospedagem"
+            android:textSize="15sp" />
+
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onNovoGasto"
+        android:layout_marginTop="20dp"
+        android:text="Adicionar gasto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rd_group_gasto" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

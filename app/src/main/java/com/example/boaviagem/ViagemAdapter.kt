@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.boaviagem.model.Viagem
 import kotlinx.coroutines.runBlocking
@@ -13,10 +12,10 @@ import kotlinx.coroutines.runBlocking
 class ViagemAdapter(private val listaViagem: List<Viagem>) : RecyclerView.Adapter<ViagemAdapter.ViagemViewHolder>() {
 
     class ViagemViewHolder(itemViagem: View) : RecyclerView.ViewHolder(itemViagem) {
-        val imgView: ImageView = itemViagem.findViewById(R.id.viagem_imagem_list)
+        val imgView: ImageView   = itemViagem.findViewById(R.id.viagem_imagem_list)
         val imgDelete: ImageView = itemViagem.findViewById(R.id.viagem_deletarViagem)
         val txtDestino: TextView = itemViagem.findViewById(R.id.viagem_destino_list)
-        val txtTipo: TextView = itemViagem.findViewById(R.id.viagem_tipo_list)
+        val txtTipo: TextView    = itemViagem.findViewById(R.id.viagem_tipo_list)
 
     }
 
@@ -32,7 +31,7 @@ class ViagemAdapter(private val listaViagem: List<Viagem>) : RecyclerView.Adapte
 
         holder.imgView.setImageResource(viagem.getIDResourceTipo())
         holder.txtDestino.text = viagem.destino
-        holder.txtTipo.text = viagem.tipoViagem.toString()
+        holder.txtTipo.text    = viagem.tipoViagem.toString()
 
         val activityHome = holder.itemView.context as ActivityHome
 
@@ -40,6 +39,12 @@ class ViagemAdapter(private val listaViagem: List<Viagem>) : RecyclerView.Adapte
             runBlocking {
                 activityHome.getViagemRepository().deletaViagem(viagem)
             }
+
+            activityHome.atualizaRecyclerViagem()
+        }
+
+        holder.itemView.setOnClickListener {
+            activityHome.onViagemSelecionada(viagem.id)
         }
     }
 
